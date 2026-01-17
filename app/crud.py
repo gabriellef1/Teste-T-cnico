@@ -26,7 +26,7 @@ def update_cliente(db: Session, cliente_id: int, cliente: schemas.ClienteCreate)
     db_cliente = db.query(models.Cliente).filter(models.Cliente.id == cliente_id).first()
     if not db_cliente:
         return None
-
+    
     # Atualiza os dados do cliente
     db_cliente.nome = cliente.nome
     db_cliente.telefone = cliente.telefone

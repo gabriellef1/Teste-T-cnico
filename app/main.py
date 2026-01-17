@@ -28,3 +28,14 @@ def remover_cliente(cliente_id: int, db: Session = Depends(get_db)):
     if not cliente:
         raise HTTPException(status_code=404, detail="Cliente não encontrado")
     return {"message": "Cliente removido com sucesso"}
+
+@app.put("/clientes/{cliente_id}", response_model=schemas.ClienteResponse)
+def atualizar_cliente(cliente_id: int, cliente: schemas.ClienteCreate, db: Session = Depends(get_db)):
+    db_cliente = crud.update_cliente(db, cliente_id, cliente)
+    if not db_cliente:
+        raise HTTPException(status_code=404, detail="Cliente não encontrado")
+    return db_cliente
+
+@app.get("/consulta/final-placa/{numero}")
+def consultar_por_final_placa(numero: str, db: Session = Depends(get_db)):
+    return crud.get_clientes_por_final_placa(db, numero)
