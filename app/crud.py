@@ -20,3 +20,19 @@ def delete_cliente(db: Session, cliente_id: int):
         db.delete(cliente)
         db.commit()
     return cliente
+
+def update_cliente(db: Session, cliente_id: int, cliente: schemas.ClienteCreate):
+    # Busca o cliente pelo ID
+    db_cliente = db.query(models.Cliente).filter(models.Cliente.id == cliente_id).first()
+    if not db_cliente:
+        return None
+
+    # Atualiza os dados do cliente
+    db_cliente.nome = cliente.nome
+    db_cliente.telefone = cliente.telefone
+    db_cliente.cpf = cliente.cpf
+    db_cliente.placa_carro = cliente.placa_carro
+
+    db.commit()
+    db.refresh(db_cliente)
+    return db_cliente
