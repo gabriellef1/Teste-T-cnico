@@ -1,7 +1,5 @@
 # API de Controle de Clientes e Placas
 
-API REST desenvolvida como teste técnico para a vaga de Desenvolvedor Python.
-
 O sistema realiza o controle de clientes e suas respectivas placas de veículos,
 utilizando FastAPI e PostgreSQL, com ambiente configurado via Docker.
 
